@@ -25,7 +25,7 @@ const Header = () => {
       <li className="text-[rgba(0, 0, 0, 1)]"><Link  to={"/appointment"}>
         Appointment
       </Link></li>
-      <li className="text-[rgba(0, 0, 0, 1)]"><Link  to={"/contact"}>
+      <li className="text-[rgba(0, 0, 0, 1)]"><Link  to={"/contactUs"}>
         Contact Us
       </Link></li>
       {user?.uid ? (
