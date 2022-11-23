@@ -37,8 +37,10 @@ const Register = () => {
         displayName: data.name
       }
       updateUser(userInfo)
-      .then(()=>{console.log(user)
-      navigate('/')
+      .then(()=>{
+      // console.log(user)
+      saveUser(user.displayName, user.email)
+        
       })
       .catch(error => console.error(error))
     })
@@ -46,8 +48,33 @@ const Register = () => {
       console.log(error.message)
       setSignUpError(error.message);
     })
+  }
 
+  const saveUser = (name, email) => {
+    const user = {name, email};
+    fetch('http://localhost:5000/users',{
+      method: 'POST',
+      headers: {
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(data => {
+      verifyUser(email);
+      // console.log('Saved User' ,data);
+    })
+  }
 
+  const verifyUser = email =>{
+    fetch(`http://localhost:5000/jwt?email=${email}`)
+    .then(res=> res.json())
+    .then(data => {
+      if(data.accessToken){
+        localStorage.setItem('token', data.accessToken);
+        navigate('/');
+      }
+    })
   }
 
   return (
