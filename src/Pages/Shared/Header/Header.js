@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
 import "./Header.css";
-import { Button } from "react-daisyui";
+
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);

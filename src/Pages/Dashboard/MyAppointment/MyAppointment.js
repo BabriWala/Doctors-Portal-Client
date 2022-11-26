@@ -12,10 +12,10 @@ const MyAppointment = () => {
     queryFn: async () =>{
       const res = await fetch(url, {
         headers: {
-          authorization: `bearer ${localStorage.getItem('token')}`
+          authorization: `bearer ${localStorage.getItem('accessToken')}`
         }
       });
-      const data = res.json();
+      const data = await res.json();
       return data;
     }
   })

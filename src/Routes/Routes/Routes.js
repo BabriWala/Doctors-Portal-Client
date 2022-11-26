@@ -5,11 +5,13 @@ import Main from '../../Layout/Main';
 import About from '../../Pages/About/About';
 import Appointment from '../../Pages/Appointment/Appointment/Appointment';
 import ContactUs from '../../Pages/ContactUs/ContactUs';
+import AllUsers from '../../Pages/Dashboard/AllUsers/AllUsers';
 import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
 import MyAppointment from '../../Pages/Dashboard/MyAppointment/MyAppointment';
 import Home from '../../Pages/Home/Home/Home';
 import Login from '../../Pages/Login/Login/Login';
 import Register from '../../Pages/Login/Register/Register';
+import AdminRoute from '../PrivateRoute/AdminRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 const router = createBrowserRouter([
     {
@@ -55,7 +57,11 @@ const router = createBrowserRouter([
             {
                 path:'/dashboard',
                 element: <MyAppointment></MyAppointment>
-            }
+            },
+            {
+                path:'/dashboard/allUsers',
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
         ]
     }
 ])

@@ -3,6 +3,7 @@ import {useForm} from 'react-hook-form';
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
+import useToken from "../../../hooks/useToken";
 
 /* 
     [+] Import UseForm
@@ -22,7 +23,13 @@ const Register = () => {
   const {register, handleSubmit, formState: {errors}} = useForm();
   const {createUser, updateUser} = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState('');
+  const [createdUserEmail, setCreatedUserEmail] = useState('')
+  const [token] = useToken(createdUserEmail);
   const navigate = useNavigate();
+  if(token){
+    return navigate('/');
+  }
+
 
 
   const handleSignUp = data => {
@@ -61,21 +68,25 @@ const Register = () => {
     })
     .then(res => res.json())
     .then(data => {
-      verifyUser(email);
+      
+      // if(data.acknowledged){
+        setCreatedUserEmail(email);
+      // }
+      // getUserToken(email);
       // console.log('Saved User' ,data);
     })
   }
 
-  const verifyUser = email =>{
-    fetch(`http://localhost:5000/jwt?email=${email}`)
-    .then(res=> res.json())
-    .then(data => {
-      if(data.accessToken){
-        localStorage.setItem('token', data.accessToken);
-        navigate('/');
-      }
-    })
-  }
+  // const getUserToken = email =>{
+  //   fetch(`http://localhost:5000/jwt?email=${email}`)
+  //   .then(res=> res.json())
+  //   .then(data => {
+  //     if(data.accessToken){
+  //       localStorage.setItem('accessToken', data.accessToken);
+  //       navigate('/');
+  //     }
+  //   })
+  // }
 
   return (
     <div className=" w-full h-auto lg:h-[90vh] flex items-center justify-center">

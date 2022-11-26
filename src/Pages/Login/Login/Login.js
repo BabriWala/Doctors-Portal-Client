@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../context/AuthProvider";
+import useToken from "../../../hooks/useToken";
 
 const Login = () => {
   const [emailError, setEmailError] = useState("");
@@ -8,10 +9,15 @@ const Login = () => {
   const [logInError, setLogInError] = useState('');
 
   const {logIn} = useContext(AuthContext);
+  const [loginUserEmail, setLoginUserEmail] = useState('');
+  const [token] = useToken(loginUserEmail);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
+  if(token){
+    navigate(from, {replace: true});
+  }
 
   const handleLogin = (event) => {
 
@@ -40,7 +46,9 @@ const Login = () => {
 
       logIn(logInUser.email, logInUser.password)
       .then(()=>{
-        navigate(from, {replace: true});
+        console.log(logInUser.email);
+        setLoginUserEmail(logInUser.email)
+        console.log(logInUser.email);
       })
       .catch(error => setLogInError(error.message));
 
