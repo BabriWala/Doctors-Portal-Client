@@ -5,6 +5,7 @@ import Main from '../../Layout/Main';
 import About from '../../Pages/About/About';
 import Appointment from '../../Pages/Appointment/Appointment/Appointment';
 import ContactUs from '../../Pages/ContactUs/ContactUs';
+import AddDoctor from '../../Pages/Dashboard/AddDoctor/AddDoctor';
 import AllUsers from '../../Pages/Dashboard/AllUsers/AllUsers';
 import Dashboard from '../../Pages/Dashboard/Dashboard/Dashboard';
 import MyAppointment from '../../Pages/Dashboard/MyAppointment/MyAppointment';
@@ -13,6 +14,7 @@ import Login from '../../Pages/Login/Login/Login';
 import Register from '../../Pages/Login/Register/Register';
 import AdminRoute from '../PrivateRoute/AdminRoute';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
+import ManageDoctors from '../../Pages/Dashboard/ManageDoctors/ManageDoctors';
 const router = createBrowserRouter([
     {
         path: '/',
@@ -61,6 +63,14 @@ const router = createBrowserRouter([
             {
                 path:'/dashboard/allUsers',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
+            {
+                path:'/dashboard/addDoctor',
+                element: <AdminRoute><AddDoctor></AddDoctor></AdminRoute>
+            },
+            {
+                path:'/dashboard/manageDoctors',
+                element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
             },
         ]
     }
